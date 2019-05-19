@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>My pet</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="css/animate.css">
+
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+
+    <link rel="stylesheet" href="css/aos.css">
+
+    <link rel="stylesheet" href="css/ionicons.min.css">
+
+    <link rel="stylesheet" href="css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="css/jquery.timepicker.css">
+
+
+    <link rel="stylesheet" href="css/flaticon.css">
+    <link rel="stylesheet" href="css/icomoon.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .round_icon {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 2px solid #fff;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+    </style>
+
+</head>
+<body>
+
+<div id="colorlib-page">
+    <a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
+    <aside id="colorlib-aside" role="complementary" class="js-fullheight text-center">
+        <h1 id="colorlib-logo"><img src="images/icon_doge.jpeg" class="round_icon" alt="dog icon"/></h1>
+        <nav id="colorlib-main-menu" role="navigation">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li class="colorlib-active"><a href="mypets.html">My Pets</a></li>
+                <li><a href="wishlist.html">Wish list</a></li>
+                <li><a onclick="logout()">Logout</a></li>
+            </ul>
+        </nav>
+    </aside> <!-- END COLORLIB-ASIDE -->
+    <div id="colorlib-main">
+        <section class="ftco-section bg-light ftco-bread">
+            <div class="container">
+                <div class="row no-gutters slider-text align-items-center">
+                    <div class="col-md-12 ftco-animate">
+                        <h1 class="mb-3 bread">My Pets
+                            <button type="button" style="float: right;" class="btn py-2 px-4 btn-success"
+                                    data-toggle="modal" data-target="#addNewPet">
+                                Add New Pet
+                            </button>
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="ftco-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="row" id="show_pets">
+                        </div>
+                    </div><!-- END-->
+                </div>
+            </div>
+    </div>
+    </section>
+</div><!-- END COLORLIB-MAIN -->
+</div><!-- END COLORLIB-PAGE -->
+
+ loader
+<div id="ftco-loader" class="show fullscreen">
+    <svg class="circular" width="48px" height="48px">
+        <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/>
+        <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
+                stroke="#F96D00"/>
+    </svg>
+</div>
+
+<div class="modal fade" id="addNewPet" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addNewPetModalLabel">New pet</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post" onsubmit="return add()">
+                    <div class="form-group">
+                        <label for="pet-name" class="col-form-label">Pet Name *</label>
+                        <input type="text" class="form-control" id="pet-name">
+                    </div>
+                    <div class="form-group">
+                        <label for="man" class="col-form-label">
+                            <input id="man" type="radio" checked="checked" name="gender_add" value="0"> Male
+                        </label>
+                        <label for="woman" class="col-form-label">
+                            <input id="woman" type="radio" name="gender_add" value="1"> Female
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="pet-breed" class="col-form-label">Pet Breed *</label>
+                        <input type="text" class="form-control" id="pet-breed">
+                    </div>
+                    <div class="form-group">
+                        <label for="pet-age" class="col-form-label">Pet Age *</label>
+                        <input type="text" class="form-control" id="pet-age">
+                    </div>
+                    <div class="form-group">
+                        <label for="pet-description" class="col-form-label">Pet description:</label>
+                        <textarea class="form-control" id="pet-description"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="pet-picture" class="col-form-label">Pet picture:</label>
+                        <input type="file" id="pet-picture" class="form-control-label">
+                        <img style="margin-top: 20px;" width="300px;" src="" id="showPet" value='custom' alt=""/>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="add()">Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="editPet" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editPetModalLabel">Edit pet</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post" onsubmit="return edit()">
+                    <input id="pet-id" hidden="hidden">
+                    <div class="form-group">
+                        <label for="edit-pet-name" class="col-form-label">Pet Name *</label>
+                        <input type="text" class="form-control" id="edit-pet-name" size="10">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-man" class="col-form-label">
+                            <input id="edit-man" type="radio" checked="checked" name="gender" value="0"> Male
+                        </label>
+                        <label for="edit-woman" class="col-form-label">
+                            <input id="edit-woman" type="radio" name="gender" value="1"> Female
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-pet-breed" class="col-form-label">Pet Breed *</label>
+                        <input type="text" class="form-control" id="edit-pet-breed">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-pet-age" class="col-form-label">Pet Age *</label>
+                        <input type="text" class="form-control" id="edit-pet-age">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-pet-description" class="col-form-label">Pet description:</label>
+                        <textarea class="form-control" id="edit-pet-description"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-pet-picture" class="col-form-label">Pet picture:</label>
+                        <input type="file" id="edit-pet-picture" class="form-control-label">
+                        <img style="margin-top: 20px;" width="300px;" src="" id="edit-showPet" value='custom' alt=""/>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="edit()">Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery-migrate-3.0.1.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.easing.1.3.js"></script>
+<script src="js/jquery.waypoints.min.js"></script>
+<script src="js/jquery.stellar.min.js"></script>
+<script src="js/owl.carousel.min.js"></script>
+<script src="js/jquery.magnific-popup.min.js"></script>
+<script src="js/aos.js"></script>
+<script src="js/jquery.animateNumber.min.js"></script>
+<script src="js/bootstrap-datepicker.js"></script>
+<script src="js/scrollax.min.js"></script>
+<script src="js/main.js"></script>
+<script src="js/aws-sdk.js"></script>
+<script type="text/javascript" src="lib/axios/dist/axios.standalone.js"></script>
+<script type="text/javascript" src="lib/CryptoJS/rollups/hmac-sha256.js"></script>
+<script type="text/javascript" src="lib/CryptoJS/rollups/sha256.js"></script>
+<script type="text/javascript" src="lib/CryptoJS/components/hmac.js"></script>
+<script type="text/javascript" src="lib/CryptoJS/components/enc-base64.js"></script>
+<script type="text/javascript" src="lib/url-template/url-template.js"></script>
+<script type="text/javascript" src="lib/apiGatewayCore/sigV4Client.js"></script>
+<script type="text/javascript" src="lib/apiGatewayCore/apiGatewayClient.js"></script>
+<script type="text/javascript" src="lib/apiGatewayCore/simpleHttpClient.js"></script>
+<script type="text/javascript" src="lib/apiGatewayCore/utils.js"></script>
+<script type="text/javascript" src="js/apigClient.js"></script>
+<script type="text/javascript" src="js/utils.js"></script>
+
+<script>
+
+    function textModify(info) {
+        $("#pet-id").val(info);
+        let obj = document.getElementById(info);
+        let img = obj.getElementsByTagName('a')[0];
+        let style = window.getComputedStyle(img, false);
+        let bi = style.backgroundImage.slice(4, -1).replace(/"/g, "");
+        $('#edit-showPet').attr('src', bi);
+        let pName = obj.getElementsByTagName('a')[1].innerText;
+        $('#edit-pet-name').val(pName);
+        let pBreed = obj.getElementsByTagName('p')[0].getElementsByTagName('span')[0].innerText;
+        $('#edit-pet-breed').val(pBreed);
+        let pGender = obj.getElementsByTagName('p')[0].getElementsByTagName('span')[1].innerText;
+        if (String(pGender) === 'male') {
+            $('#edit-man').attr('checked', 'checked');
+            $('#edit-woman').attr('checked', false);
+        } else {
+            $('#edit-woman').attr('checked', 'checked');
+            $('#edit-man').attr('checked', false);
+        }
+
+
+        let pAge = obj.getElementsByTagName('p')[0].getElementsByTagName('span')[2].innerText;
+        $('#edit-pet-age').val(pAge);
+        let pDescription = obj.getElementsByTagName('p')[1].innerText;
+        $('#edit-pet-description').val(pDescription);
+    }
+
+    document.getElementById('edit-pet-picture').onchange = function () {
+        let imgFile = this.files[0];
+        let fr = new FileReader();
+        fr.onload = function () {
+            document.getElementById('edit-showPet').src = fr.result;
+            apigClient.recognizePost({}, {'file_content':fr.result.split(",")[1]}, {})
+                .then(function(result) {
+                    console.log(result);
+                    $("#edit-pet-breed").val(result['data']['label']);
+                }).catch(function(error) {
+                console.log(error);
+            });
+        };
+        fr.readAsDataURL(imgFile);
+    };
+
+
+    document.getElementById('pet-picture').onchange = function () {
+        let imgFile = this.files[0];
+        let fr = new FileReader();
+        fr.onload = function () {
+            document.getElementById('showPet').src = fr.result;
+            apigClient.recognizePost({}, {'file_content':fr.result.split(",")[1]}, {})
+                .then(function(result) {
+                    console.log(result);
+                    $("#pet-breed").val(result['data']['label']);
+                }).catch(function(error) {
+                console.log(error);
+            });
+        };
+        fr.readAsDataURL(imgFile);
+    };
+
+    var apigClient;
+    var id_token = getCookie('id_token');
+    var jwt = parseJwt(id_token);
+    //https://petpairing.auth.us-east-1.amazoncognito.com/login?response_type=token&client_id=2stvr0481459s1gve6onvtr640&redirect_uri=https://s3.amazonaws.com/pet-pairing/index.html
+    $(document).ready(function () {
+        AWS.config.region = 'us-east-1'; // Region
+        AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+            IdentityPoolId: 'us-east-1:c2f21473-dc46-4de8-80c3-1a2d39feca93',
+            Logins: {
+                'cognito-idp.us-east-1.amazonaws.com/us-east-1_6WDTLxGO8': id_token
+            }
+        });
+        AWS.config.credentials.refresh(function () {
+            var accessKeyId = AWS.config.credentials.accessKeyId;
+            var secretAccessKey = AWS.config.credentials.secretAccessKey;
+            var sessionToken = AWS.config.credentials.sessionToken;
+            apigClient = apigClientFactory.newClient({
+                accessKey: accessKeyId,
+                secretKey: secretAccessKey,
+                sessionToken: sessionToken,
+                region: 'us-east-1'
+            });
+            var params = {"user_email": jwt['email']};
+            var body = {};
+            var additionalParams = {};
+            apigClient.userMypetsGet(params, body, additionalParams)
+                .then(function (result) {
+                    // alert(result)
+                    var pets = result['data']['Items'];
+                    $.each(pets, function (index, value) {
+                        var html = "";
+                        html += "<div class=\"col-md-4\" id=\"" + value['pet_id'] + "\">";
+                        html += "<div class=\"blog-entry ftco-animate fadeInUp ftco-animated\">";
+                        html += "<a href=\"single.html?pet_id=" + value['pet_id'] + "\" class=\"img img-2\" style=\"background-image: url(" + value['pet_image'] + ");\"></a>";
+                        html += "<div class=\"text text-2 pt-2 mt-3\">";
+                        html += "<h3 class=\"mb-2\"><a>" + value['name'] + "</a>" +
+                            "<input type=\"button\" value=\"Edit\" class=\"btn py-2 px-3 btn-primary\" data-toggle=\"modal\" data-target=\"#editPet\" onclick='textModify(\"" + value['pet_id'] + "\")'>\n" +
+                            "<input type=\"button\" value=\"Remove\" class=\"btn py-2 px-3 btn-primary\" onclick='remove(\"" + value['pet_id'] + "\")'>\n" +
+                            "</h3>";
+                        var gender = String(value['gender']) === "0" ? "male" : "female";
+                        html += "<div class=\"meta-wrap\">\n" +
+                            "    <p class=\"meta\">\n" +
+                            "        <span>" + value['breed'] + "</span>" +
+                            "        <span>" + gender + "</span>" +
+                            "        <span>" + value['age'] + "</span>" +
+                            "    </p>" +
+                            "</div>";
+                        html += "<p class=\"mb-4\">" + value['description'] + "</p>";
+                        html += "</div>";
+                        html += "</div>";
+                        html += "</div>";
+                        $('#show_pets').append(html);
+                    })
+                }).catch(function (error) {
+                console.log(error)
+            });
+        });
+    });
+
+    function edit() {
+        var body = {
+            "pet_id": $("#pet-id").val(),
+            "name": $("#edit-pet-name").val(),
+            "breed": $("#edit-pet-breed").val(),
+            "description": $("#edit-pet-description").val(),
+            "age": $("#edit-pet-age").val(),
+            "gender": $("input[name='gender']:checked").val()
+        };
+        var files = document.getElementById('edit-pet-picture').files;
+        if (files.length > 0) {
+            var file = files[0];
+            body['file'] = file.name;
+            var reader = new FileReader();
+            reader.readAsBinaryString(file);
+            reader.onload = function (e) {
+                // var body = btoa(reader.result);
+                body['file_content'] = btoa(reader.result);
+                apigClient.userMypetsEditPost({}, body, {})
+                    .then(function (result) {
+                        location.reload()
+                    })
+                    .catch(function(error) {
+                        location.reload()
+                    });
+            };
+        } else {
+            apigClient.userMypetsEditPost({}, body, {})
+                .then(function (result) {
+                    location.reload()
+                })
+                .catch(function (error) {
+                    location.reload();
+                });
+        }
+    }
+
+    function add() {
+        var body = {
+            "user_email": jwt['email'],
+            "name": $("#pet-name").val(),
+            "breed": $("#pet-breed").val(),
+            "description": $("#pet-description").val(),
+            "age": $("#pet-age").val(),
+            "gender": $("input[name='gender_add']:checked").val()
+        };
+        var files = document.getElementById('pet-picture').files;
+        if (files.length > 0) {
+            var file = files[0];
+            body['file'] = file.name;
+            var reader = new FileReader();
+            reader.readAsBinaryString(file);
+            reader.onload = function (e) {
+                // var body = btoa(reader.result);
+                body['file_content'] = btoa(reader.result);
+                apigClient.userMypetsAddPost({}, body, {})
+                    .then(function (result) {
+                        location.reload()
+                    })
+                    .catch(function (error) {
+                        location.reload();
+                    });
+            };
+        } else {
+            alert("One image needed!")
+        }
+
+    }
+
+    function remove(pet_id) {
+        var body = {
+            "pet_id": pet_id,
+            "user_email": jwt['email']
+        };
+        apigClient.userMypetsDeletePost({}, body, {})
+            .then(function(result) {
+                location.reload();
+            })
+            .catch(function(error) {
+                location.reload();
+            });
+
+    }
+</script>
+
+</body>
+</html>

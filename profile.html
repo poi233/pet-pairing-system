@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Profile</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="css/animate.css">
+
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+
+    <link rel="stylesheet" href="css/aos.css">
+
+    <link rel="stylesheet" href="css/ionicons.min.css">
+
+    <link rel="stylesheet" href="css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="css/jquery.timepicker.css">
+
+
+    <link rel="stylesheet" href="css/flaticon.css">
+    <link rel="stylesheet" href="css/icomoon.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .round_icon {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 2px solid #fff;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+    </style>
+
+</head>
+<body>
+
+<div id="colorlib-page">
+    <a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
+    <aside id="colorlib-aside" role="complementary" class="js-fullheight text-center">
+        <h1 id="colorlib-logo"><img src="images/icon_doge.jpeg" class="round_icon" alt="dog icon"/></h1>
+        <nav id="colorlib-main-menu" role="navigation">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li class="colorlib-active"><a href="profile.html">Profile</a></li>
+                <li><a href="mypets.html">My Pets</a></li>
+                <li><a href="wishlist.html">Wish list</a></li>
+                <li><a onclick="logout()">Logout</a></li>
+            </ul>
+        </nav>
+    </aside> <!-- END COLORLIB-ASIDE -->
+    <div id="colorlib-main">
+        <section class="ftco-section bg-light ftco-bread">
+            <div class="container">
+                <div class="row no-gutters slider-text align-items-center">
+                    <div class="col-md-9 ftco-animate">
+                        <h1 class="mb-3 bread">My profile</h1>
+                        <!--	            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>-->
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="ftco-section">
+            <div class="container">
+                <form class="p-3 p-md-5 bg-light" onsubmit="return edit()">
+                    <div class="form-group">
+                        <label>Email *</label>
+                        <p id="user_email"></p>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Name *</label>
+                        <input type="text" name="name" class="form-control" id="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Address</label>
+                        <input type="text" name="address" class="form-control" id="address">
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea name="description" id="description" cols="30" rows="5"
+                                  class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <input type="button" value="Save" class="btn py-3 px-4 btn-primary" onclick="edit()">
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div><!-- END COLORLIB-MAIN -->
+</div><!-- END COLORLIB-PAGE -->
+
+<!-- loader -->
+<div id="ftco-loader" class="show fullscreen">
+    <svg class="circular" width="48px" height="48px">
+        <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/>
+        <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
+                stroke="#F96D00"/>
+    </svg>
+</div>
+
+
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery-migrate-3.0.1.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.easing.1.3.js"></script>
+<script src="js/jquery.waypoints.min.js"></script>
+<script src="js/jquery.stellar.min.js"></script>
+<script src="js/owl.carousel.min.js"></script>
+<script src="js/jquery.magnific-popup.min.js"></script>
+<script src="js/aos.js"></script>
+<script src="js/jquery.animateNumber.min.js"></script>
+<script src="js/bootstrap-datepicker.js"></script>
+<script src="js/scrollax.min.js"></script>
+<script src="js/main.js"></script>
+<script src="js/aws-sdk.js"></script>
+<script type="text/javascript" src="lib/axios/dist/axios.standalone.js"></script>
+<script type="text/javascript" src="lib/CryptoJS/rollups/hmac-sha256.js"></script>
+<script type="text/javascript" src="lib/CryptoJS/rollups/sha256.js"></script>
+<script type="text/javascript" src="lib/CryptoJS/components/hmac.js"></script>
+<script type="text/javascript" src="lib/CryptoJS/components/enc-base64.js"></script>
+<script type="text/javascript" src="lib/url-template/url-template.js"></script>
+<script type="text/javascript" src="lib/apiGatewayCore/sigV4Client.js"></script>
+<script type="text/javascript" src="lib/apiGatewayCore/apiGatewayClient.js"></script>
+<script type="text/javascript" src="lib/apiGatewayCore/simpleHttpClient.js"></script>
+<script type="text/javascript" src="lib/apiGatewayCore/utils.js"></script>
+<script type="text/javascript" src="js/apigClient.js"></script>
+<script type="text/javascript" src="js/utils.js"></script>
+
+
+<script>
+
+    var apigClient;
+    var id_token = getCookie('id_token');
+    var jwt = parseJwt(id_token) ;
+
+    $(document).ready(function () {
+        AWS.config.region = 'us-east-1'; // Region
+        AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+            IdentityPoolId: 'us-east-1:c2f21473-dc46-4de8-80c3-1a2d39feca93',
+            Logins: {
+                'cognito-idp.us-east-1.amazonaws.com/us-east-1_6WDTLxGO8': id_token
+            }
+        });
+        AWS.config.credentials.refresh(function () {
+            var accessKeyId = AWS.config.credentials.accessKeyId;
+            var secretAccessKey = AWS.config.credentials.secretAccessKey;
+            var sessionToken = AWS.config.credentials.sessionToken;
+            apigClient = apigClientFactory.newClient({
+                accessKey: accessKeyId,
+                secretKey: secretAccessKey,
+                sessionToken: sessionToken,
+                region: 'us-east-1'
+            });
+            var param = {
+                "user_email": jwt['email']
+            };
+            apigClient.userGet(param, undefined, undefined)
+                .then(function (result) {
+                    var info = result['data'];
+                    $("#user_email").html(info['user_email']);
+                    $("#name").val(info['name']);
+                    $("#address").val(info['address']);
+                    $("#description").val(info['description']);
+                })
+                .catch(function (error) {
+                    console.log(error)
+                });
+        });
+    });
+
+    function edit() {
+        var body = {
+            "user_email": $("#user_email").html(),
+            "name": $("#name").val(),
+            "address": $("#address").val(),
+            "description": $("#description").val()
+        };
+        apigClient.userEditPost({}, body, {})
+            .then(function (result) {
+                alert("edit success");
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+</script>
+
+</body>
+</html>
